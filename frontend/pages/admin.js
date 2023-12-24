@@ -7,7 +7,6 @@ const AdminPanel = () => {
   const [password, setPassword] = useState("");
   const [authenticated, setAuthenticated] = useState(false);
   const [tickets, setTickets] = useState([]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === "1234") {
@@ -16,7 +15,9 @@ const AdminPanel = () => {
   };
 
   useEffect(() => {
-    fetch("https://my-help-desk-49b4693cd9d4.herokuapp.com//api/tickets")
+    const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+    console.log("got backend url ", backendURL);
+    fetch(`${backendURL}/api/tickets`)
       .then((response) => response.json())
       .then((data) => setTickets(data))
       .catch((error) => console.error("Error fetching tickets:", error));
