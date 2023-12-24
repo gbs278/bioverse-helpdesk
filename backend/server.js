@@ -1,9 +1,7 @@
-// backend/server.js
-
 const express = require("express");
-const cors = require("cors"); // Import the 'cors' package
+const cors = require("cors");
 const app = express();
-const PORT = process.env.PORT || 3001; // Define your desired port
+const PORT = process.env.PORT || 3001;
 const { Pool } = require("pg");
 require("dotenv").config();
 app.use(express.json());
@@ -12,7 +10,7 @@ app.use(cors());
 const URL = process.env.DATABASE_URL;
 const pool = new Pool({
   connectionString: URL,
-  ssl: { rejectUnauthorized: false }, // For development, you may need this for SSL
+  ssl: { rejectUnauthorized: false },
 });
 
 // Get all tickets
