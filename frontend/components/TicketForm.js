@@ -8,23 +8,21 @@ const TicketForm = () => {
   const [problemDescription, setProblemDescription] = useState("");
 
   const handleSubmit = async (e) => {
+    const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://my-help-desk-49b4693cd9d4.herokuapp.com/api/tickets",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            problemDescription,
-            status: "New", // Assuming the default status for new tickets is 'New'
-          }),
-        }
-      );
+      const response = await fetch(`${backendURL}/api/tickets`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          problemDescription,
+          status: "New", // Assuming the default status for new tickets is 'New'
+        }),
+      });
 
       if (response.ok) {
         console.log("Ticket submitted successfully!");

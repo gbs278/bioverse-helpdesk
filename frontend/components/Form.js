@@ -6,22 +6,21 @@ const Form = ({ closeModal }) => {
   const [problemDescription, setProblemDescription] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
     try {
-      const response = await fetch(
-        "https://my-help-desk-49b4693cd9d4.herokuapp.com/api/tickets",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            problemDescription,
-            status: "New", // Assuming the default status for new tickets is 'New'
-          }),
-        }
-      );
+      const response = await fetch(`${backendURL}/api/tickets`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          problemDescription,
+          status: "New", // Assuming the default status for new tickets is 'New'
+        }),
+      });
 
       if (response.ok) {
         // Reset form fields after successful submission

@@ -16,7 +16,6 @@ const AdminPanel = () => {
 
   useEffect(() => {
     const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
-    console.log("got backend url ", backendURL);
     fetch(`${backendURL}/api/tickets`)
       .then((response) => response.json())
       .then((data) => setTickets(data))

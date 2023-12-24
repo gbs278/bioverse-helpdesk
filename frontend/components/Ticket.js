@@ -15,7 +15,8 @@ const Ticket = ({ id, name, email, description, status }) => {
     setNewStatus("");
   };
   const handleStatusUpdate = () => {
-    fetch(`https://my-help-desk-49b4693cd9d4.herokuapp.com/api/tickets/${id}`, {
+    const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+    fetch(`${backendURL}/api/tickets/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -24,9 +25,7 @@ const Ticket = ({ id, name, email, description, status }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data); // Log the response from the server
-
-        closeModal(); // Close the modal after status update
+        closeModal();
         localStorage.setItem("changedStatus", "true");
         const statusChange = `Ticket id ${id} status changde from ${status} to ${newStatus} \nName: ${name}\nDescription: ${description}\nEmail Address: ${email}`;
         localStorage.setItem("ticketStatusChange", statusChange);
