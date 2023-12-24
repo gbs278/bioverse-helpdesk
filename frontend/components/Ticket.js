@@ -15,16 +15,13 @@ const Ticket = ({ id, name, email, description, status }) => {
     setNewStatus("");
   };
   const handleStatusUpdate = () => {
-    fetch(
-      `https://my-help-desk-49b4693cd9d4.herokuapp.com//api/tickets/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ newStatus }),
-      }
-    )
+    fetch(`https://my-help-desk-49b4693cd9d4.herokuapp.com/api/tickets/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ newStatus }),
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data); // Log the response from the server

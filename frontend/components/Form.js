@@ -8,7 +8,7 @@ const Form = ({ closeModal }) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://my-help-desk-49b4693cd9d4.herokuapp.com//api/tickets",
+        "https://my-help-desk-49b4693cd9d4.herokuapp.com/api/tickets",
         {
           method: "POST",
           headers: {
