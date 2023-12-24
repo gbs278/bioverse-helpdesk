@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import SignIn from "../components/SignIn";
 import Ticket from "../components/Ticket";
-import Link from "next/link";
 
 const AdminPanel = () => {
   const [password, setPassword] = useState("");
@@ -36,7 +35,6 @@ const AdminPanel = () => {
           <div className="flex w-full items-center justify-center">
             <header className="text-5xl font-bold mb-4 text-white">
               {" "}
-              {/* Adjusted margin-bottom here */}
               Admin Panel - View Tickets
             </header>
           </div>

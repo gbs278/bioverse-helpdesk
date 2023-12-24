@@ -1,5 +1,4 @@
-// TicketForm.js
-"use client"; // This is a client component
+"use client";
 import React, { useState } from "react";
 
 const TicketForm = () => {
@@ -20,13 +19,12 @@ const TicketForm = () => {
           name,
           email,
           problemDescription,
-          status: "New", // Assuming the default status for new tickets is 'New'
+          status: "New",
         }),
       });
 
       if (response.ok) {
         console.log("Ticket submitted successfully!");
-        // Reset form fields after successful submission
         setName("");
         setEmail("");
         setProblemDescription("");

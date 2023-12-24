@@ -4,10 +4,11 @@ const Form = ({ closeModal }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [problemDescription, setProblemDescription] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
     try {
       const response = await fetch(`${backendURL}/api/tickets`, {
         method: "POST",
@@ -18,12 +19,11 @@ const Form = ({ closeModal }) => {
           name,
           email,
           problemDescription,
-          status: "New", // Assuming the default status for new tickets is 'New'
+          status: "New",
         }),
       });
 
       if (response.ok) {
-        // Reset form fields after successful submission
         console.log(
           `Would normally send email here with body: \n New Ticket Created! \n Name: ${name} \n Email: ${email} \n Problem Description: ${problemDescription} `
         );

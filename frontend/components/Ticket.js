@@ -4,6 +4,7 @@ const Ticket = ({ id, name, email, description, status }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showChangeStatus, setShowChangeStatus] = useState(false);
   const [newStatus, setNewStatus] = useState("");
+
   const openModal = () => {
     setIsOpen(true);
   };
@@ -11,11 +12,12 @@ const Ticket = ({ id, name, email, description, status }) => {
   const closeModal = () => {
     setIsOpen(false);
     setShowChangeStatus(false);
-
     setNewStatus("");
   };
+
   const handleStatusUpdate = () => {
     const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
     fetch(`${backendURL}/api/tickets/${id}`, {
       method: "PUT",
       headers: {
@@ -27,7 +29,7 @@ const Ticket = ({ id, name, email, description, status }) => {
       .then((data) => {
         closeModal();
         localStorage.setItem("changedStatus", "true");
-        const statusChange = `Ticket id ${id} status changde from ${status} to ${newStatus} \nName: ${name}\nDescription: ${description}\nEmail Address: ${email}`;
+        const statusChange = `Ticket id ${id} status changed from ${status} to ${newStatus} \nName: ${name}\nDescription: ${description}\nEmail Address: ${email}`;
         localStorage.setItem("ticketStatusChange", statusChange);
         const shouldReload = window.confirm(statusChange);
         if (shouldReload) {
@@ -40,21 +42,18 @@ const Ticket = ({ id, name, email, description, status }) => {
         // Handle errors
       });
   };
+
   useEffect(() => {
     const statusChanged = localStorage.getItem("changedStatus");
     const statusMessage = localStorage.getItem("ticketStatusChange");
 
-    // Check if the status has changed and it's the same ticket
     if (statusChanged === "true") {
       console.log(statusMessage);
-
-      // Clear the flags in localStorage
       localStorage.removeItem("changedStatus");
       localStorage.removeItem("ticketStatusChange");
     }
-  }, []); // useEffect runs whenever the 'id' changes
+  }, []);
 
-  //  from-gray-900 to-gray-800
   return (
     <div className="border p-4 my-4 rounded-md shadow-md bg-white">
       <p className="text-black">{description}</p>
@@ -81,6 +80,7 @@ const Ticket = ({ id, name, email, description, status }) => {
             <p>
               <strong>Description:</strong> {description}
             </p>
+
             {showChangeStatus ? (
               <div>
                 <div>
@@ -110,6 +110,7 @@ const Ticket = ({ id, name, email, description, status }) => {
                 Change Status
               </button>
             )}
+
             <button
               className="mt-4 bg-gray-800 text-white px-3 py-1 rounded-md"
               onClick={closeModal}

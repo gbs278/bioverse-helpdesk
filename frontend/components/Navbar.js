@@ -1,18 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 const Navbar = () => {
-  const router = useRouter();
-  const isAuthenticated =
-    typeof window !== "undefined" &&
-    localStorage.getItem("isAuthenticated") === "true";
-
-  const handleLogout = () => {
-    localStorage.removeItem("isAuthenticated");
-    router.push("/");
-  };
-
   return (
     <div className="w-full bg-gray-900 sticky">
       <div className="container mx-auto px-4">
